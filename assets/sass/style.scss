@@ -2,8 +2,7 @@
 // IMPORTANT: only add imports to this file
 
 // External libraries
-@import '@fortawesome/fontawesome-free/css/all';
-@import 'swiper/dist/css/swiper';
+@import 'swiper/css/bundle';
 @import 'photoswipe/dist/photoswipe';
 
 // Main variables
@@ -15,10 +14,14 @@
 @import 'bootstrap_import/bootstrap';
 @import 'bootstrap_import/bootstrap_override';
 
+// Accessibility
+@import 'accessibility';
+
 // Mixins
 @import 'mixins/text';
 @import 'mixins/mixins';
 @import 'typography';
+@import 'icons';
 
 // General Layout
 @import 'layout/site_logo';
@@ -95,6 +98,3 @@
 
 // Cookie ribbon
 @import 'cookie_control';
-
-// Accessibility
-@import 'accessibility';

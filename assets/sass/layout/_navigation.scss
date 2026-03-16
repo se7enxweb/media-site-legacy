@@ -76,7 +76,7 @@
         }
     }
     .submenu-trigger {
-        @extend %fontawesome;
+        // NOTE: Removed fontawesome extend rule since the nav will we rewritten
         display: none;
     }
     /* small screen sizes */
@@ -145,6 +145,14 @@
             }
         }
     }
+    @include media-breakpoint-down(lg) {
+        overflow: scroll;
+        position: absolute;
+        z-index: 1000;
+        left: 0;
+        right: 0;
+        height: calc(100vh - #{$header-height-sm});
+    }
     @include media-breakpoint-down(xs) {
         left: 0;
         right: 0;
@@ -157,6 +165,8 @@
     position: relative;
     width: $header-height-sm;
     height: $header-height-sm;
+    background: transparent;
+    border: none;
     .hamburger {
         display: block;
         width: 1.25rem;
@@ -202,5 +212,19 @@
     }
     @include media-breakpoint-down(lg) {
         display: block;
+    }
+}
+
+
+.mainnav-active {
+    @include media-breakpoint-down(lg) {
+        overflow-y: hidden;
+        position: fixed;
+        width: 100%;
+        body {
+            overflow-y: hidden;
+            position: fixed;
+            width: 100%;
+        }
     }
 }

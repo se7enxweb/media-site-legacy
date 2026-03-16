@@ -3,43 +3,68 @@
     display: flex;
     align-items: center;
     padding: 2rem 0;
-
+    ol {
+        display: flex;
+        padding: 0;
+        margin: 0;
+    }
     @include media-breakpoint-down(md) {
         padding: 1.5rem 0;
     }
-
-    .fas {
-        margin-right: .5rem;
-        color: #000;
-        margin-bottom: 2px;
-    }
-
     .breadcrumb-item {
         @include text-base;
         margin-right: 1rem;
         background-color: transparent;
-        color: #000;
+        color: $black;
         position: relative;
         display: flex;
         align-items: center;
         white-space: nowrap;
-
         @include media-breakpoint-down(md) {
             display: none;
         }
-
+        &:first-child a {
+            display: inline-block;
+        }
         & + .breadcrumb-item {
             padding-left: 0;
             &:before {
                 @include text-1_25;
                 content: "/";
+                content: "/" / "";
                 color: inherit;
                 margin-right: 1rem;
-                color: #000;
+                color: $black;
                 padding: 0;
-
-                @include media-breakpoint-down(md) {
+                @include media-breakpoint-down(sm) {
                     content: none;
+                }
+            }
+        }
+        &.breadcrumb-item--link:not(:has(+ .breadcrumb-item--link)) {
+            @include media-breakpoint-down(md) {
+                display: flex;
+            }
+            span {
+                &:before {
+                    @extend %icon-chevron-left;
+                    content: "";
+                    width: 1rem;
+                    height: 1rem;
+                    margin-right: 10px;
+                    display: none;
+                }
+                @include media-breakpoint-down(md) {
+                    display: inline-flex;
+                    align-items: center;
+                    &:before {
+                        display: inline-block;
+                    }
+                }
+            }
+            @include media-breakpoint-down(md) {
+                &:before {
+                    content: initial;
                 }
             }
         }
@@ -59,41 +84,15 @@
                 }
             }
         }
-    }
-    a:last-of-type {
-        @include media-breakpoint-down(md) {
-            display: flex;
-        }
-
-        .icon-home-page {
-            @include media-breakpoint-down(md) {
-                display: none;
-            }
-        }
-
-        &.breadcrumb-item {
-            @include media-breakpoint-down(md) {
-                padding-left: 2rem;
-                &:before {
-                    -moz-osx-font-smoothing: grayscale;
-                    -webkit-font-smoothing: antialiased;
-                    display: inline-block;
-                    font-style: normal;
-                    font-variant: normal;
-                    text-rendering: auto;
-                    line-height: 1;
-                    font-family: 'Font Awesome 5 Free';
-                    font-weight: 900;
-                    display: block;
-                    color: inherit;
-                    content: "\f053";
-                    margin-right: .5rem;
-                    color: #000;
-                    @include text-1_5;
-                    position: absolute;
-                    left: 0;
-                    transform: none;
-                }
+        .icon-home {
+            &::before {
+                content: "";
+                width: 1rem;
+                height: 1rem;
+                position: relative;
+                top: 1px;
+                margin-right: 10px;
+                @extend %icon-home;
             }
         }
     }

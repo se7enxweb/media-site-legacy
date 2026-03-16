@@ -4,6 +4,8 @@ $header-bg: $white;
 .site-header {
     background: $header-bg;
     position: relative;
+    z-index: 1000;
+    transition: all .15s ease-in-out;
     > .container {
         height: $header-height;
         display: flex;
@@ -12,7 +14,6 @@ $header-bg: $white;
     @include media-breakpoint-down(lg) {
         > .container {
             height: $header-height-sm;
-            position: relative;
             .site-logo {
                 order: 1;
                 margin-right: auto;
@@ -28,12 +29,20 @@ $header-bg: $white;
             }
         }
     }
+
+    &.site-header-sticky--active {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+        transition: all .15s ease-in-out;
+    }
 }
 
 /* header language selector */
 .language-selector {
     margin: 0 0 0 1em;
-    a {
+    a, button {
         @extend %hover-underline;
         @include text-0_75;
         text-transform: uppercase;
@@ -47,6 +56,28 @@ $header-bg: $white;
         align-items: center;
         padding: 0 1em;
         transition: color .2s;
+        background: transparent;
+        border: none;
+
+        &.show {
+            position: relative;
+            z-index: 1001;
+            background: $primary;
+
+            i {
+                transform: rotate(180deg);
+            }
+        }
+
+        i {
+            width: 0.75rem;
+            height: 0.75rem;
+
+            &.icon-angle-down {
+                @extend %icon-angle-down;
+            }
+        }
+
         @include media-breakpoint-down(lg) {
             height: $header-height-sm;
         }
@@ -66,18 +97,17 @@ $header-bg: $white;
         a {
             padding: .5em 1em;
             display: block;
+            &:hover {
+                color: $gray-54;
+            }
+            &:focus-visible {
+                @include custom-outline;
+            }
         }
         .current {
             a {
                 color: $gray-54;
             }
-        }
-    }
-    &.show {
-        .current-lang {
-            position: relative;
-            z-index: 1001;
-            background: $primary;
         }
     }
 }
@@ -98,6 +128,22 @@ $header-bg: $white;
         background: $header-bg;
         z-index: 2;
         transition: color .2s, background .3s;
+
+        i {
+            width: 1rem;
+            height: 1rem;
+            position: relative;
+            top: 1px;
+
+            @include media-breakpoint-down(md) {
+                width: 0.9rem;
+                height: 0.9rem;
+            }
+
+            &.icon-search {
+                @extend %icon-search;
+            }
+        }
     }
     .navbar-search {
         padding: 1rem $btn-width 1rem 1rem;
@@ -110,6 +156,7 @@ $header-bg: $white;
         display: flex;
         background: $primary;
         opacity: 0;
+        visibility: hidden;
     }
     .search-query {
         flex: 1;
@@ -130,6 +177,9 @@ $header-bg: $white;
         top: 0;
         bottom: 0;
         cursor: pointer;
+        &:focus-visible {
+            @include custom-outline;
+        }
     }
 
     /* searchbox opened */
@@ -143,6 +193,7 @@ $header-bg: $white;
             width: 18rem;
             transition: width .4s;
             z-index: 1;
+            visibility: visible;
         }
         /* entered text in input */
         &.filled {
@@ -160,6 +211,14 @@ $header-bg: $white;
     @include media-breakpoint-down(md) {
         .searchbox-toggle {
             width: 4rem;
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        .searchbox-active & {
+            .navbar-search {
+                width: calc(100vw - $header-height-sm);
+            }
         }
     }
 }

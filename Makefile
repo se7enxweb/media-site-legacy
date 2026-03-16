@@ -1,5 +1,5 @@
 APP_ENV = dev
-PHP_VERSION = php8.1
+PHP_VERSION = php8.2
 PHP_RUN = /usr/bin/env $(PHP_VERSION)
 COMPOSER_PATH = /usr/local/bin/composer2
 ifeq ("$(wildcard $(COMPOSER_PATH))","")
@@ -27,6 +27,12 @@ endif
 .PHONY: vendor
 vendor: ## Run composer install
 	$(COMPOSER_RUN) install $(COMPOSER_INSTALL_PARAMETERS)
+
+.PHONY: ibexa-assets
+.ONESHELL:
+ibexa-assets: ## Generate Ibexa Admin UI assets
+	. ${NVM_DIR}/nvm.sh && nvm use || nvm install $(cat .nvmrc)
+	$(COMPOSER_RUN) ibexa-assets
 
 .PHONY: assets
 .ONESHELL:
@@ -84,6 +90,7 @@ ifeq ($(APP_ENV), prod)
 else
 	$(MAKE) -s assets
 endif
+	@$(MAKE) -s ibexa-assets
 	@$(MAKE) -s graphql-schema
 	@$(MAKE) -s clear-cache
 

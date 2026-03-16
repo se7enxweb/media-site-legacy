@@ -15,7 +15,8 @@ import ResponsiveVideo from './components/ResponsiveVideo.component';
 import SwiperBase from './components/SwiperBase.component';
 import SwiperThumb from './components/SwiperThumb.component';
 import VideoPoster from './components/VideoPoster.component';
-import SkipToMainContent from './components/SkipToMainContent.component';
+import AccessibilitySkips from './components/AccessibilitySkips.component';
+import FocusTrap from './components/FocusTrap.component';
 
 // Configuration
 const componentConfiguration = [
@@ -38,6 +39,7 @@ const componentConfiguration = [
       optionalListToggle: '.optional-list-toggle',
       rotateArrowClass: 'rotate-arrow',
       shownClass: 'shown',
+      modal: '.ng-cc-modal',
     },
   },
   {
@@ -64,7 +66,7 @@ const componentConfiguration = [
     Component: PageHeader,
     selector: 'html',
     options: {
-      pageWrapper: '#page',
+      pageWrapper: 'html',
       navToggle: '.mainnav-toggle',
       searchToggle: '.searchbox-toggle',
       headerSearch: '.header-search',
@@ -80,6 +82,7 @@ const componentConfiguration = [
       navigationList: 'ul.nav.navbar-nav',
       filledClass: 'filled',
       languageSelector: '.site-header .language-selector',
+      stickyHeader: '.site-header-sticky',
     },
   },
   {
@@ -92,7 +95,7 @@ const componentConfiguration = [
   },
   {
     Component: SwiperBase,
-    selector: '.related-multimedia.swiper-container',
+    selector: '.related-multimedia.swiper',
     options: {
       swiperPreviousButton: '.swiper-button-prev',
       swiperNextButton: '.swiper-button-next',
@@ -108,15 +111,15 @@ const componentConfiguration = [
       swiperPagination: '.swiper-pagination',
       swiperPaginationType: 'bullets',
       swiperConfig: {
-        loopFillGroupWithBlank: true,
-        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
         spaceBetween: 30,
+        slidesPerView: 1.2,
         breakpoints: {
           767: {
-            slidesPerView: 1.2,
+            slidesPerView: 2.2,
           },
           1199: {
-            slidesPerView: 2.2,
+            slidesPerView: 3,
           },
         },
       },
@@ -141,9 +144,10 @@ const componentConfiguration = [
           enabled: true,
         },
         autoHeight: true,
+        slidesPerView: 1.2,
         breakpoints: {
           1199: {
-            slidesPerView: 1.2,
+            slidesPerView: 1,
             spaceBetween: 30,
           },
         },
@@ -209,8 +213,16 @@ const componentConfiguration = [
     },
   },
   {
-    Component: SkipToMainContent,
+    Component: AccessibilitySkips,
     selector: '#skip-to-main-content',
+  },
+  {
+    Component: FocusTrap,
+    selector: '.js-focus-trap',
+    options: {
+      deactivateSelectors: '.ng-cc-btn-close',
+      activeClass: '[open]',
+    },
   },
 ];
 
