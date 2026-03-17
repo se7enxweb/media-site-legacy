@@ -47,6 +47,10 @@ system:
                             - ng_recipe
                             - ng_topic
                             - ng_video
+                flow_page:
+                    template: "@MediataEzpageFieldtype/flow_page.html.twig"
+                    match:
+                        Identifier\ContentType: flow_page
                 match_all:
                     redirect:
                         target: '@=namedLocation("homepage")'
